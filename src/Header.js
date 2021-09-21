@@ -1,4 +1,6 @@
-function Header({dispatch}) {
+import "./Header.css"
+
+function Header({dispatch, onHowToPlay}) {
 
     return (
         <header className="header">
@@ -9,10 +11,10 @@ function Header({dispatch}) {
                         <button className="navigation-link" onClick={() => dispatch({type: "restart"})}>[New Game]</button>
                     </li>
                     <li className="navigation-item">
-                        <button className="navigation-link">[How to play]</button>
+                        <button className="navigation-link" onClick={onHowToPlay}>[How to play]</button>
                     </li>
                     <li className="navigation-item">
-                        <button className="navigation-link">[GitHub]</button>
+                        <a href="https://github.com/N0rbee/sticks" className="navigation-link">[GitHub]</a>
                     </li>
                 </ul>
             </nav>

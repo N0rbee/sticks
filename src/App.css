@@ -9,48 +9,6 @@
   --player-2-dark: #d63031;
 }
 
-.header {
-  background-color: #f4f5f6;
-  border-bottom: 1px solid #d1d1d1;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.page-title {
-  line-height: 3rem;
-}
-
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  max-width: 40rem;
-  margin: 0 auto;
-}
-
-.navigation-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navigation-item {
-  display: inline-block;
-  line-height: 3rem;
-  margin-left: 1em;
-}
-
-.navigation-link {
-  border: none;
-  background: none;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
 .game-field {
   max-width: 40rem;
   margin: 4rem auto 0;

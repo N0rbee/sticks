@@ -3,7 +3,8 @@ import Stick from './Stick';
 import Header from './Header';
 import StatusBar from './StatusBar';
 import Controls from './Controls';
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
+import Modal from './Modal';
 
 const DATA = {
   MIN: 1,
@@ -68,7 +69,8 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, 0, initState)
+  const [state, dispatch] = useReducer(reducer, 0, initState);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   let winner;
   if (state.sticks.length <= DATA.MIN) {
@@ -84,7 +86,7 @@ function App() {
 
   return (
     <main className={state.currentPlayer === 1 ? "player-1-turn" : "player-2-turn"}>
-      <Header dispatch={dispatch} />
+      <Header dispatch={dispatch} onHowToPlay={() => setModalIsOpen(true)} />
       <section className="game-field">
         <StatusBar total={state.sticks.length} />
         <div className="sticks-wrapper">
@@ -99,6 +101,13 @@ function App() {
         />
       </section>
       {winner}
+      <Modal open={modalIsOpen} title="How to play" onClose={() => setModalIsOpen(false)}>
+        <p>
+          There are "N" sticks on the table.
+          A player in his or her turn can pick min. "a" or max. "b" sticks.
+          The player who can't pick or can only pick min. "a" sticks loses the game.
+        </p>
+      </Modal>
     </main>
   );
 }
