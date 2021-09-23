@@ -6,32 +6,32 @@
     left: 0;
     width: 100%;
     z-index: 100;
-  }
+}
   
-  .page-title {
+.page-title {
     line-height: 3rem;
-  }
+}
   
-  .navigation {
+.navigation {
     display: flex;
     justify-content: space-between;
     max-width: 40rem;
     margin: 0 auto;
-  }
+}
   
-  .navigation-list {
+.navigation-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
-  }
+}
   
-  .navigation-item {
+.navigation-item {
     display: inline-block;
     line-height: 3rem;
     margin-left: 1em;
-  }
+}
   
-  .navigation-link {
+.navigation-link {
     border: none;
     background: none;
     font-family: 'Roboto', sans-serif;
@@ -39,4 +39,4 @@
     font-size: 0.9rem;
     cursor: pointer;
     text-decoration: none;
-  }
+}

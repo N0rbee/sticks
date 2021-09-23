@@ -1,0 +1,22 @@
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settings-body {
+    margin: 0.75rem 0;
+}
+
+.settings-setting {
+    margin: 0.5rem 0;
+}
+
+.settings-label {
+    display: inline-block;
+    width: 6rem;
+}
+
+.settings-input {
+    width: 5rem;
+}

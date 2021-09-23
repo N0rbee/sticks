@@ -3,18 +3,21 @@ import Stick from './Stick';
 import Header from './Header';
 import StatusBar from './StatusBar';
 import Controls from './Controls';
+import Winner from './Winner';
+import HowToPlay from './HowToPlay';
+import Settings from './Settings';
 import { useReducer, useState } from 'react';
-import Modal from './Modal';
 
+// TODO: object set only once from save
 const DATA = {
   MIN: 1,
   MAX: 10,
   TOTAL: 100
 }
 
-function initState(init) {
+function initState(numberOfSticks) {
   let sticks = [];
-  for (let i = 0; i < DATA.TOTAL; i++) {
+  for (let i = 0; i < numberOfSticks; i++) {
     sticks.push({
       id: i,
       isSelected: false,
@@ -62,31 +65,24 @@ function reducer(state, action) {
         currentPlayer: (state.currentPlayer + 1) % 2
       };
     case "restart":
-      return initState(0);
+      return initState(DATA.TOTAL);
     default:
       return state;
   }
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, 0, initState);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  let winner;
-  if (state.sticks.length <= DATA.MIN) {
-    winner = (
-      <div className="winner">
-        <h2 className="winner-title">Winner</h2>
-        <p className="winner-name">{state.currentPlayer === 1 ? "Player 2" : "Player 1"}</p>
-      </div>
-    );
-  } else {
-    winner = null;
-  }
+  const [state, dispatch] = useReducer(reducer, DATA.TOTAL, initState);
+  const [howToPlayIsOpen, setHowToPlayIsOpen] = useState(false);
+  const [settingsIsOpen, setSettingsIsOpen] = useState(false);
 
   return (
     <main className={state.currentPlayer === 1 ? "player-1-turn" : "player-2-turn"}>
-      <Header dispatch={dispatch} onHowToPlay={() => setModalIsOpen(true)} />
+      <Header
+        dispatch={dispatch}
+        onHowToPlay={() => setHowToPlayIsOpen(true)}
+        onSettings={() => setSettingsIsOpen(true)}
+      />
       <section className="game-field">
         <StatusBar total={state.sticks.length} />
         <div className="sticks-wrapper">
@@ -100,14 +96,9 @@ function App() {
           max={DATA.MAX}
         />
       </section>
-      {winner}
-      <Modal open={modalIsOpen} title="How to play" onClose={() => setModalIsOpen(false)}>
-        <p>
-          There are "N" sticks on the table.
-          A player in his or her turn can pick min. "a" or max. "b" sticks.
-          The player who can't pick or can only pick min. "a" sticks loses the game.
-        </p>
-      </Modal>
+      <Winner winner={(state.sticks.length <= DATA.MIN) ? ((state.currentPlayer === 1) ? "Player 2" : "Player 1") : ""} />
+      <HowToPlay open={howToPlayIsOpen} onClose={() => setHowToPlayIsOpen(false)} />
+      <Settings open={settingsIsOpen} onClose={() => setSettingsIsOpen(false)} />
     </main>
   );
 }
