@@ -25,36 +25,40 @@ function calculateValidRanges(total, min) {
   }
 }
 
-function Settings({open, onClose}) {
+function validateRange(input, range) {
+  let error = '';
+  if (isNaN(input)) {
+    error = 'No an Integer';
+  } else if (input < range[0] || input > range[1]) {
+    error = 'Out of range';
+  }
+  return error;
+}
+
+function Settings({open, onClose, onSave}) {
   const [total, setTotal] = useState(100);
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(10);
   const validRanges = useMemo(() => calculateValidRanges(total, min), [total, min]);
+  const [errors, setErrors] = useState({total: '', min: '', max: ''});
 
   function handleSubmit(e) {
     e.preventDefault();
-    // TODO: check if between valid ranges
+    const errorTotal = validateRange(total, validRanges.total);
+    const errorMin = validateRange(min, validRanges.min);
+    const errorMax = validateRange(max, validRanges.max);
+    setErrors({
+      total: errorTotal,
+      min: errorMin,
+      max: errorMax
+    });
+    if (errorTotal === '' && errorMin === '' && errorMax === '') {
+      onSave(total, min, max);
+      onClose();
+    }
   }
 
-    /** 
-     * TODO:
-     * 
-     * reducer to set total, min, max
-     * if total change: 
-     *  - set total between 10 and 1000
-     *  - min = Math.min(min, total)
-     *  - max = Math.min(Math.max(min, max), total)
-     * if min change:
-     *  - set min between 1 and total
-     *  - max = Math.min(Math.max(min, max), total)
-     * if max change:
-     *  - set max between min and total
-     * 
-     * if save (save and new game):
-     *  - call onSave (sets DATA, and call dispatch: reset)
-    */
-
-    return (
+  return (
       <Modal open={open} title="Settings" onClose={onClose}>
         <form className="settings" onSubmit={handleSubmit}>
           <div className="settings-body">
@@ -68,6 +72,7 @@ function Settings({open, onClose}) {
                 onChange={(e) => setTotal(e.target.value)}
                 value={total}
               />
+              {errors.total && <small className="setting-error">{errors.total}</small>}
             </div>
             <div className="settings-setting">
               <label className="settings-label">
@@ -79,6 +84,7 @@ function Settings({open, onClose}) {
                 onChange={(e) => setMin(e.target.value)}
                 value={min}
               />
+              {errors.min && <small className="setting-error">{errors.min}</small>}
             </div>
             <div className="settings-setting">
               <label className="settings-label">
@@ -90,6 +96,7 @@ function Settings({open, onClose}) {
                 onChange={(e) => setMax(e.target.value)}
                 value={max}
               />
+              {errors.max && <small className="setting-error">{errors.max}</small>}
             </div>
           </div>
           <div className="settings-footer">

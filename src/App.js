@@ -76,6 +76,13 @@ function App() {
   const [howToPlayIsOpen, setHowToPlayIsOpen] = useState(false);
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
 
+  function saveSettings(total, min ,max) {
+    DATA.TOTAL = total;
+    DATA.MIN = min;
+    DATA.MAX = max;
+    dispatch({type: 'restart'});
+  }
+
   return (
     <main className={state.currentPlayer === 1 ? "player-1-turn" : "player-2-turn"}>
       <Header
@@ -98,7 +105,7 @@ function App() {
       </section>
       <Winner winner={(state.sticks.length <= DATA.MIN) ? ((state.currentPlayer === 1) ? "Player 2" : "Player 1") : ""} />
       <HowToPlay open={howToPlayIsOpen} onClose={() => setHowToPlayIsOpen(false)} />
-      <Settings open={settingsIsOpen} onClose={() => setSettingsIsOpen(false)} />
+      <Settings open={settingsIsOpen} onClose={() => setSettingsIsOpen(false)} onSave={saveSettings} />
     </main>
   );
 }

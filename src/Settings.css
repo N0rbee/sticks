@@ -20,3 +20,8 @@
 .settings-input {
     width: 5rem;
 }
+
+.setting-error {
+    color: #f44336;
+    margin-left: 0.5rem;
+}
