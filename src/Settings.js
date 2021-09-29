@@ -1,4 +1,3 @@
-import "./Settings.css";
 import Modal from "./Modal";
 import { useState, useMemo } from "react";
 
@@ -60,47 +59,34 @@ function Settings({open, onClose, onSave}) {
 
   return (
       <Modal open={open} title="Settings" onClose={onClose}>
-        <form className="settings" onSubmit={handleSubmit}>
-          <div className="settings-body">
-            <div className="settings-setting">
-              <label className="settings-label">
+        <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+          <div>
+            <div className="mb-2">
+              <label className="inline-block w-28">
                 Total <small>({validRanges.total[0]}...{validRanges.total[1]})</small>
               </label>
-              <input
-                className="settings-input"
-                type="text"
-                onChange={(e) => setTotal(e.target.value)}
-                value={total}
-              />
-              {errors.total && <small className="setting-error">{errors.total}</small>}
+              <input className="border w-20" type="text" onChange={(e) => setTotal(e.target.value)} value={total} />
+              {errors.total && <small className="text-red-600 ml-1">{errors.total}</small>}
             </div>
-            <div className="settings-setting">
-              <label className="settings-label">
+            <div className="mb-2">
+              <label className="inline-block w-28">
                 Min. <small>({validRanges.min[0]}...{validRanges.min[1]})</small>
               </label>
-              <input
-                className="settings-input"
-                type="text"
-                onChange={(e) => setMin(e.target.value)}
-                value={min}
-              />
-              {errors.min && <small className="setting-error">{errors.min}</small>}
+              <input className="border w-20" type="text" onChange={(e) => setMin(e.target.value)} value={min} />
+              {errors.min && <small className="text-red-600 ml-1">{errors.min}</small>}
             </div>
-            <div className="settings-setting">
-              <label className="settings-label">
+            <div>
+              <label className="inline-block w-28">
                 Max. <small>({validRanges.max[0]}...{validRanges.max[1]})</small>
               </label>
-              <input
-                className="settings-input"
-                type="text"
-                onChange={(e) => setMax(e.target.value)}
-                value={max}
-              />
-              {errors.max && <small className="setting-error">{errors.max}</small>}
+              <input className="border w-20" type="text" onChange={(e) => setMax(e.target.value)} value={max} />
+              {errors.max && <small className="text-red-600 ml-1">{errors.max}</small>}
             </div>
           </div>
-          <div className="settings-footer">
-            <button className="settings-save" type="submit">Save &amp; New Game</button>
+          <div className="mt-4">
+            <button className="text-sm tracking-wider uppercase bg-blue-400 shadow text-white py-2 px-4 rounded" type="submit">
+              Save &amp; New Game
+            </button>
           </div>
         </form>
       </Modal>
