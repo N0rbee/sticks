@@ -1,4 +1,3 @@
-import './App.css';
 import Stick from './Stick';
 import Header from './Header';
 import StatusBar from './StatusBar';
@@ -84,16 +83,23 @@ function App() {
   }
 
   return (
-    <main className={state.currentPlayer === 1 ? "player-1-turn" : "player-2-turn"}>
+    <main>
       <Header
         dispatch={dispatch}
         onHowToPlay={() => setHowToPlayIsOpen(true)}
         onSettings={() => setSettingsIsOpen(true)}
       />
-      <section className="game-field">
-        <StatusBar total={state.sticks.length} />
-        <div className="sticks-wrapper">
-          {state.sticks.map(stick => <Stick key={stick.id} selected={stick.selected} top={stick.top} left={stick.left} rotation={stick.rotation} />)}
+      <section className="max-w-2xl mx-auto mt-16">
+        <StatusBar total={state.sticks.length} currentPlayer={state.currentPlayer} />
+        <div className="relative mx-auto my-2" style={{width: "500px", height: "500px"}}>
+          {state.sticks.map(stick => <Stick
+            key={stick.id}
+            selected={stick.selected}
+            top={stick.top}
+            left={stick.left}
+            rotation={stick.rotation}
+            currentPlayer={state.currentPlayer}
+          />)}
         </div>
         <Controls
           dispatch={dispatch}
@@ -101,6 +107,7 @@ function App() {
           selectedNumber={state.selectedNumber}
           min={DATA.MIN}
           max={DATA.MAX}
+          currentPlayer={state.currentPlayer}
         />
       </section>
       <Winner winner={(state.sticks.length <= DATA.MIN) ? ((state.currentPlayer === 1) ? "Player 2" : "Player 1") : ""} />

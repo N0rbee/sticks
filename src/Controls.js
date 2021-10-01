@@ -1,38 +1,38 @@
-function Controls({dispatch, inputNumber, selectedNumber, min, max}) {
+function Controls({dispatch, inputNumber, selectedNumber, min, max, currentPlayer}) {
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        dispatch({type: "removeSticks"})
-    }
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch({type: "removeSticks"})
+  }
 
-    return (
-        <form className="controls" onSubmit={handleSubmit}>
-            <div className="remove-sticks">
-                <button 
-                    className="remove-btn" 
-                    type="submit"
-                    disabled={selectedNumber < min}>
-                    Remove {selectedNumber} sticks
-                </button>
-            </div>
-            <div className="select-sticks">
-                <input
-                    className="select-input"
-                    type="range"
-                    onChange={(e) => dispatch({type: "selectSticks", payload: {value: e.target.value}})}
-                    value={inputNumber}
-                    min={min}
-                    max={max}
-                    step={1}
-                />
-                <div className="select-range">
-                    <span>Min.: {min}</span>
-                    {String(inputNumber) !== String(selectedNumber) && <span className="select-invalid">{inputNumber} forced to {selectedNumber}</span>}
-                    <span>Max.: {max}</span>
-                </div>
-            </div>
-        </form>
-    );
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="text-center my-4">
+        <button 
+          className={`text-sm tracking-wider uppercase shadow text-white py-2 px-4 rounded ${currentPlayer === 1 ? "bg-green-400" : "bg-red-400"}`}
+          type="submit"
+          disabled={selectedNumber < min}>
+          Take {selectedNumber} sticks
+        </button>
+      </div>
+      <div>
+        <input
+          className="w-full"
+          type="range"
+          onChange={(e) => dispatch({type: "selectSticks", payload: {value: e.target.value}})}
+          value={inputNumber}
+          min={min}
+          max={max}
+          step={1}
+        />
+        <div className="flex justify-between text-sm">
+          <span>Min.: {min}</span>
+          {String(inputNumber) !== String(selectedNumber) && <span className="text-red-500">{inputNumber} forced to {selectedNumber}</span>}
+          <span>Max.: {max}</span>
+        </div>
+      </div>
+    </form>
+  );
 }
 
 export default Controls;

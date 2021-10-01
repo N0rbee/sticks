@@ -11,7 +11,7 @@ function Modal({open, title, onClose, children}) {
                     <h1 className="font-bold">{title}</h1>
                     <button className="text-4xl px-2" onClick={onClose}>&times;</button>
                 </header>
-                <div className="p-4">
+                <div className="px-6 py-4">
                     {children}
                 </div>
             </div>

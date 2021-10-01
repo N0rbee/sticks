@@ -63,24 +63,24 @@ function Settings({open, onClose, onSave}) {
           <div>
             <div className="mb-2">
               <label className="inline-block w-28">
-                Total <small>({validRanges.total[0]}...{validRanges.total[1]})</small>
+                Total <small>[{validRanges.total[0]}, {validRanges.total[1]}]</small>
               </label>
               <input className="border w-20" type="text" onChange={(e) => setTotal(e.target.value)} value={total} />
-              {errors.total && <small className="text-red-600 ml-1">{errors.total}</small>}
+              {errors.total && <small className="text-red-500 ml-1">{errors.total}</small>}
             </div>
             <div className="mb-2">
               <label className="inline-block w-28">
-                Min. <small>({validRanges.min[0]}...{validRanges.min[1]})</small>
+                Min. <small>[{validRanges.min[0]}, {validRanges.min[1]}]</small>
               </label>
               <input className="border w-20" type="text" onChange={(e) => setMin(e.target.value)} value={min} />
-              {errors.min && <small className="text-red-600 ml-1">{errors.min}</small>}
+              {errors.min && <small className="text-red-500 ml-1">{errors.min}</small>}
             </div>
             <div>
               <label className="inline-block w-28">
-                Max. <small>({validRanges.max[0]}...{validRanges.max[1]})</small>
+                Max. <small>[{validRanges.max[0]}, {validRanges.max[1]}]</small>
               </label>
               <input className="border w-20" type="text" onChange={(e) => setMax(e.target.value)} value={max} />
-              {errors.max && <small className="text-red-600 ml-1">{errors.max}</small>}
+              {errors.max && <small className="text-red-500 ml-1">{errors.max}</small>}
             </div>
           </div>
           <div className="mt-4">
