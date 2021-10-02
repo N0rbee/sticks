@@ -1,14 +1,13 @@
-import Stick from './Stick';
-import Header from './Header';
-import StatusBar from './StatusBar';
-import Controls from './Controls';
-import Winner from './Winner';
-import HowToPlay from './HowToPlay';
-import Settings from './Settings';
+import Stick from './components/Stick';
+import Header from './components/Header';
+import StatusBar from './components/StatusBar';
+import Controls from './components/Controls';
+import Winner from './components/Winner';
+import HowToPlay from './components/HowToPlay';
+import Settings from './components/Settings';
 import { useReducer, useState } from 'react';
 
-// TODO: object set only once from save
-const DATA = {
+const SETTINGS = {
   MIN: 1,
   MAX: 10,
   TOTAL: 100
@@ -37,12 +36,12 @@ function reducer(state, action) {
   switch (action.type) {
     case "selectSticks":
       let selectedNumber = parseInt(action.payload.value);
-      if (isNaN(selectedNumber) || (state.sticks.length <= DATA.MIN)) {
+      if (isNaN(selectedNumber) || (state.sticks.length <= SETTINGS.MIN)) {
         selectedNumber = 0;
-      } else if (selectedNumber < DATA.MIN) {
+      } else if (selectedNumber < SETTINGS.MIN) {
         selectedNumber = 0;
       } else  {
-        selectedNumber = Math.min(selectedNumber, DATA.MAX, (state.sticks.length - 1));
+        selectedNumber = Math.min(selectedNumber, SETTINGS.MAX, (state.sticks.length - 1));
       }
       let fromId = state.sticks.length - selectedNumber;
       return {
@@ -64,21 +63,21 @@ function reducer(state, action) {
         currentPlayer: (state.currentPlayer + 1) % 2
       };
     case "restart":
-      return initState(DATA.TOTAL);
+      return initState(SETTINGS.TOTAL);
     default:
       return state;
   }
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, DATA.TOTAL, initState);
+  const [state, dispatch] = useReducer(reducer, SETTINGS.TOTAL, initState);
   const [howToPlayIsOpen, setHowToPlayIsOpen] = useState(false);
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
 
   function saveSettings(total, min ,max) {
-    DATA.TOTAL = total;
-    DATA.MIN = min;
-    DATA.MAX = max;
+    SETTINGS.TOTAL = total;
+    SETTINGS.MIN = min;
+    SETTINGS.MAX = max;
     dispatch({type: 'restart'});
   }
 
@@ -105,12 +104,12 @@ function App() {
           dispatch={dispatch}
           inputNumber={state.inputNumber}
           selectedNumber={state.selectedNumber}
-          min={DATA.MIN}
-          max={DATA.MAX}
+          min={SETTINGS.MIN}
+          max={SETTINGS.MAX}
           currentPlayer={state.currentPlayer}
         />
       </section>
-      <Winner winner={(state.sticks.length <= DATA.MIN) ? ((state.currentPlayer === 1) ? "Player 2" : "Player 1") : ""} />
+      <Winner winner={(state.sticks.length <= SETTINGS.MIN) ? ((state.currentPlayer === 1) ? "Player 2" : "Player 1") : ""} />
       <HowToPlay open={howToPlayIsOpen} onClose={() => setHowToPlayIsOpen(false)} />
       <Settings open={settingsIsOpen} onClose={() => setSettingsIsOpen(false)} onSave={saveSettings} />
     </main>
