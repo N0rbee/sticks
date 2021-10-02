@@ -6,8 +6,8 @@ function Controls({dispatch, inputNumber, selectedNumber, min, max, currentPlaye
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="text-center my-4">
+    <form onSubmit={handleSubmit} className="pt-4">
+      <div className="text-center mb-4">
         <button 
           className={`text-sm tracking-wider uppercase shadow text-white py-2 px-4 rounded ${currentPlayer === 1 ? "bg-green-400" : "bg-red-400"}`}
           type="submit"

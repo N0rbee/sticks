@@ -19,8 +19,8 @@ function initState(numberOfSticks) {
     sticks.push({
       id: i,
       isSelected: false,
-      top: Math.floor(Math.random() * 338),
-      left: Math.floor(Math.random() * 338) + 78,
+      top: Math.floor(Math.random() * 100),
+      left: Math.floor(Math.random() * 100),
       rotation: Math.floor(Math.random() * 180)
     });
   }
@@ -88,17 +88,19 @@ function App() {
         onHowToPlay={() => setHowToPlayIsOpen(true)}
         onSettings={() => setSettingsIsOpen(true)}
       />
-      <section className="max-w-2xl mx-auto mt-16">
+      <section className="max-w-2xl mx-auto mt-16 px-1">
         <StatusBar total={state.sticks.length} currentPlayer={state.currentPlayer} />
-        <div className="relative mx-auto my-2" style={{width: "500px", height: "500px"}}>
-          {state.sticks.map(stick => <Stick
-            key={stick.id}
-            selected={stick.selected}
-            top={stick.top}
-            left={stick.left}
-            rotation={stick.rotation}
-            currentPlayer={state.currentPlayer}
-          />)}
+        <div className="w-4/5 h-80 px-20 mx-auto mb-40">
+          <div className="relative -ml-1 h-full w-full">
+            {state.sticks.map(stick => <Stick
+              key={stick.id}
+              selected={stick.selected}
+              top={stick.top}
+              left={stick.left}
+              rotation={stick.rotation}
+              currentPlayer={state.currentPlayer}
+            />)}
+          </div>
         </div>
         <Controls
           dispatch={dispatch}

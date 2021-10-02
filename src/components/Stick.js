@@ -1,10 +1,8 @@
 function Stick({top, left, rotation, selected, currentPlayer}) {
 
   const stickStyle = {
-    width: "6px",
-    height: "162px",
-    top: `${top}px`,
-    left: `${left}px`,
+    top: `${top}%`,
+    left: `${left}%`,
     transform: `rotate(${rotation}deg)`
   }
 
@@ -14,7 +12,7 @@ function Stick({top, left, rotation, selected, currentPlayer}) {
   }
 
   return (
-    <div className={`absolute z-10 border ${bgClass}`} style={stickStyle}></div>
+    <div className={`absolute z-10 border w-2 h-40 ${bgClass}`} style={stickStyle}></div>
   );
 }
 
