@@ -2,7 +2,7 @@
 
 This is a minigame.
 
-# Rules
+## Rules
 
 There are "N" sticks on the table. A player in his or her turn can pick min. "a" or max. "b" sticks. The player who can't pick or can only pick min. "a" sticks loses the game.
 
