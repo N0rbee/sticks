@@ -6,6 +6,10 @@ This is a minigame.
 
 There are "N" sticks on the table. A player in his or her turn can pick min. "a" or max. "b" sticks. The player who can't pick or can only pick min. "a" sticks loses the game.
 
+## Try
+
+You can try it here https://n0rbee.github.io/sticks/
+
 # About this project 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses [Tailwind CSS](https://tailwindcss.com/). The main goal was to learn and try out these techniques.
