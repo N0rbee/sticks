@@ -8,7 +8,7 @@ There are "N" sticks on the table. A player in his or her turn can pick min. "a"
 
 ## Try
 
-You can try it here https://n0rbee.github.io/sticks/
+You can try it here: https://n0rbee.github.io/sticks/
 
 # About this project 
 
